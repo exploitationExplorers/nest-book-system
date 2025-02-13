@@ -24,6 +24,9 @@ importers:
         specifier: ^6.25.0
         version: 6.29.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
+      '@ant-design/icons':
+        specifier: ^5.6.1
+        version: 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@eslint/js':
         specifier: ^9.19.0
         version: 9.20.0
