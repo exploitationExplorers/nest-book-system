@@ -1,7 +1,7 @@
 import { Button, Card, Form, Input, message } from "antd";
 import "./index.css";
-import { useEffect, useState } from 'react';
-import { list } from '../../interfaces';
+import { useCallback, useEffect, useState } from "react";
+import { list } from "../../interfaces";
 
 interface Book {
   id: number;
@@ -12,26 +12,35 @@ interface Book {
 }
 
 export function BookManage() {
-
   const [bookList, setBookList] = useState<Book[]>([]);
-  const [name, setName] = useState<string>('');
-  async function fetchData() {
+  const [name, setName] = useState<string>("");
+  // async function fetchData() {
+  //   try {
+  //     const data = await list(name);
+
+  //     if(data.status === 201 || data.status === 200) {
+  //         setBookList(data.data);
+  //     }
+  // } catch(e: any) {
+  //     message.error(e.response.data.message);
+  // }
+  // }
+  const fetchData = useCallback(async () => {
     try {
       const data = await list(name);
-      
-      if(data.status === 201 || data.status === 200) {
-          setBookList(data.data);
+      if (data.status === 201 || data.status === 200) {
+        setBookList(data.data);
       }
-  } catch(e: any) {
+    } catch (e: any) {
       message.error(e.response.data.message);
-  }
-  }
+    }
+  }, [name]);
 
   useEffect(() => {
-    fetchData()
-  }, [name])
+    fetchData();
+  }, [name,fetchData]);
 
-  async function searchBook(value: {name: string}) {
+  async function searchBook(value: { name: string }) {
     setName(value.name);
   }
 
@@ -40,7 +49,12 @@ export function BookManage() {
       <h1>图书管理系统</h1>
       <div className="content">
         <div className="book-search">
-          <Form name="search" layout="inline" colon={false} onFinish={searchBook}>
+          <Form
+            name="search"
+            layout="inline"
+            colon={false}
+            onFinish={searchBook}
+          >
             <Form.Item label="图书名称" name="name">
               <Input />
             </Form.Item>
