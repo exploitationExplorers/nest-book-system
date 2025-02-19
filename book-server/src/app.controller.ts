@@ -1,4 +1,4 @@
-import { Controller, Get, Logger } from '@nestjs/common';
+import { Controller, Get, Logger, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -14,5 +14,9 @@ export class AppController {
     this.logger.verbose('verbose', AppController.name);
     this.logger.warn('warn', AppController.name);
     return this.appService.getHello();
+  }
+  @Post('log')
+  log(@Body() body) {
+    console.log(body);
   }
 }
