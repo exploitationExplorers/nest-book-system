@@ -9,6 +9,7 @@ import { MyLogger } from './myLogger';
 import { LoggerModule } from './logger/logger.module';
 import { LogTestModule } from './log-test/log-test.module';
 import { DynamicLogger } from './dynamicLogger/dynamicLogger.moudle';
+import { createClient } from 'redis';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,6 +24,21 @@ import { DynamicLogger } from './dynamicLogger/dynamicLogger.moudle';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, MyLogger],
+  providers: [
+    AppService,
+    {
+      provide: 'REDIS_CLIENT',
+      async useFactory() {
+        const client = createClient({
+          socket: {
+            host: 'localhost',
+            port: 6379,
+          },
+        });
+        await client.connect();
+        return client;
+      },
+    },
+  ],
 })
 export class AppModule {}

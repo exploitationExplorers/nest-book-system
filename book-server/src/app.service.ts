@@ -1,11 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { MyLogger } from './dynamicLogger/MyLogger';
+
+import { RedisClientType } from 'redis';
 @Injectable()
 export class AppService {
-  @Inject(MyLogger)
-  private logger: MyLogger;
-  getHello(): string {
-    this.logger.log('DynamicLogger', AppService.name);
+  @Inject('REDIS_CLIENT')
+  private redisClient: RedisClientType;
+  async getHello() {
+    const value = await this.redisClient.keys('*');
+    console.log('🚀 ~ value:', value);
     return 'Hello World!';
   }
 }
