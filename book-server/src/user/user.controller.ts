@@ -23,4 +23,10 @@ export class UserController {
   login(@Body() loginUserDto: RegisterUserDto) {
     return this.userService.login(loginUserDto);
   }
+
+  @Get('init')
+  async initData() {
+    await this.userService.initData();
+    return 'init success'
+  }
 }
