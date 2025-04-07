@@ -2,8 +2,7 @@
 /dist
 /node_modules
 /build
-/rbac-test/node_modules
-/nearby-search/node_modules
+
 # Logs
 logs
 *.log
