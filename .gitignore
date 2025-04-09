@@ -4,6 +4,7 @@
 /build
 /rbac-test/node_modules
 /nearby-search/node_modules
+/etcd-test/node_modules
 # Logs
 logs
 *.log
