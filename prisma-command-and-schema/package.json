@@ -14,6 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.8.2",
+    "prisma-docs-generator": "^0.8.0",
+    "prisma-json-schema-generator": "^5.1.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
   },

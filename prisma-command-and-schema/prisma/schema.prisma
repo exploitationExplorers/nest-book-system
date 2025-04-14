@@ -1,5 +1,16 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/client"
+}
+
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output   = "../generated/docs"
+}
+
+generator json {
+  provider = "prisma-json-schema-generator"
+  output   = "../generated/json"
 }
 
 datasource db {
