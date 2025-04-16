@@ -6,6 +6,7 @@
 /nearby-search/node_modules
 /etcd-test/node_modules
 /nacos-node-test/node_modules
+/rabbitmq-test/node_modules
 # Logs
 logs
 *.log
