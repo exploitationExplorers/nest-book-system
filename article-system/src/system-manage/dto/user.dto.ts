@@ -1,27 +1,29 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
-export class GetArticleListDto {
+export class UserSearchDto {
   @IsNumber()
   @Transform(({ value }) => parseInt(value, 10))
-  current: number;
-
+  current?: number;
   @IsNumber()
   @Transform(({ value }) => parseInt(value, 10))
-  size: number;
-
+  size?: number;
   @IsOptional()
   @IsString()
-  title?: string;
-
+  nickName?: string;
   @IsOptional()
   @IsString()
-  author?: string;
-
-  @IsOptional()
-  category?: string[];
-
+  status?: string;
   @IsOptional()
   @IsString()
-  status?: '1' | '2';
+  userEmail?: string;
+  @IsOptional()
+  @IsString()
+  userGender?: string;
+  @IsOptional()
+  @IsString()
+  userName?: string;
+  @IsOptional()
+  @IsString()
+  userPhone?: string;
 }

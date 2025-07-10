@@ -72,22 +72,13 @@ export class ArticleService {
   async addArticle(
     createArticleDto: CreateArticleDto,
   ): Promise<ArticleResponseDto> {
-    const { title, author, category, content, tags, status } = createArticleDto;
-
     // Create new article entity
     const article = new Article();
-    article.title = title;
-    article.author = author;
-    article.category = category;
-    article.content = content;
-    article.tags = tags;
-    article.status = status;
-    article.createBy = author; // Using author as createBy for simplicity
-    article.updateBy = author; // Using author as updateBy for simplicity
 
-    // Save to database
-    console.log('addd');
-    
+    Object.assign(article, createArticleDto);
+    article.createBy = article.author;
+    article.updateBy = article.author;
+
     const savedArticle = await this.entityManager.save(Article, article);
 
     return {
@@ -112,10 +103,7 @@ export class ArticleService {
     }
 
     // Update article
-    await this.entityManager.update(Article, id, {
-      ...updateData,
-      updateBy: updateData.author || article.updateBy, // Update the updateBy field
-    });
+    await this.entityManager.update(Article, id, updateData);
 
     // Get updated article
     const updatedArticle = await this.entityManager.findOne(Article, {
@@ -130,6 +118,8 @@ export class ArticleService {
   }
 
   async deleteArticle(id: number): Promise<ArticleResponseDto> {
+    console.log(id, 'ids');
+
     // Check if article exists
     const article = await this.entityManager.findOne(Article, {
       where: { id },
@@ -138,6 +128,10 @@ export class ArticleService {
     if (!article) {
       throw new NotFoundException(`ID为${id}的文章不存在`);
     }
+    // 先删除关联的评论
+    await this.entityManager.query(`DELETE FROM comment WHERE articleId = ?`, [
+      id,
+    ]);
 
     // Delete article
     await this.entityManager.delete(Article, id);

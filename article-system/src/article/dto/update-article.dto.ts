@@ -16,8 +16,9 @@ export class UpdateArticleDto {
   author?: string;
 
   @IsOptional()
-  @IsString()
-  category?: string;
+  @IsArray()
+  @IsString({ each: true })
+  category?: string[];
 
   @IsOptional()
   @IsString()
@@ -29,6 +30,5 @@ export class UpdateArticleDto {
   tags?: string[];
 
   @IsOptional()
-  @IsIn(['1', '2'], { message: '状态只能是1或2' })
   status?: '1' | '2';
 }

@@ -9,9 +9,9 @@ export class CreateArticleDto {
   @IsString()
   author: string;
 
-  @IsNotEmpty({ message: '分类不能为空' })
-  @IsString()
-  category: string;
+  @IsArray()
+  @IsString({ each: true })
+  category: string[];
 
   @IsNotEmpty({ message: '内容不能为空' })
   @IsString()
@@ -20,7 +20,6 @@ export class CreateArticleDto {
   @IsArray()
   @IsString({ each: true })
   tags: string[];
-
-  @IsIn(['1', '2'], { message: '状态只能是1或2' })
+  @IsString()
   status: '1' | '2';
 }

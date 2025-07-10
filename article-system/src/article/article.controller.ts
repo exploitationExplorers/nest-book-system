@@ -18,7 +18,6 @@ import { ArticleResponseDto } from './dto/article-response.dto';
 @Controller('article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
-
   @Get('getArticleList')
   async getArticleList(
     @Query() query: GetArticleListDto,
@@ -42,6 +41,8 @@ export class ArticleController {
 
   @Delete('deleteArticle/:id')
   async deleteArticle(@Param('id') id: string): Promise<ArticleResponseDto> {
+    console.log(id, 'id');
+    
     return this.articleService.deleteArticle(+id);
   }
 

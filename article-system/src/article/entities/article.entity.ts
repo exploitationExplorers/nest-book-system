@@ -18,10 +18,10 @@ export class Article {
   author: string;
 
   @Column({
-    length: 50,
+    type: 'simple-array',
     comment: '分类',
   })
-  category: string;
+  category: string[];
 
   @Column({
     type: 'text',
