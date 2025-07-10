@@ -11,6 +11,7 @@ async function bootstrap() {
       port: 8888,
     },
   });
-  await app.listen(process.env.port ?? 3002);
+  app.startAllMicroservices();
+  // await app.listen(process.env.port ?? 3002);
 }
 bootstrap();
