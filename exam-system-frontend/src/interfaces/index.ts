@@ -2,6 +2,7 @@ import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig 
 import type { RegisterUser } from "../pages/Register";
 import type { UpdatePassword } from "../pages/UpdatePassword";
 import { message } from "antd";
+import type { ExamAdd } from "../pages/ExamList/ExamAddModal";
 
 interface ErrorResponseData {
     statusCode: number;
@@ -91,4 +92,28 @@ examServiceInstance.interceptors.response.use(
 
 export async function examList() {
     return await examServiceInstance.get('/exam/list');
+}
+
+export async function examAdd(values: ExamAdd) {
+    return await examServiceInstance.post('/exam/add', values);
+}
+
+export async function examPublish(id: number) {
+    return await examServiceInstance.get('/exam/publish/' + id );
+}
+
+export async function examUnpublish(id: number) {
+    return await examServiceInstance.get('/exam/unpublish/' + id );
+}
+
+export async function examDelete(id: number) {
+    return await examServiceInstance.delete('/exam/delete/' + id );
+}
+
+export async function examFind(id: number) {
+    return await examServiceInstance.get('/exam/find/' + id );
+}
+
+export async function examSave(data: { id: number, content: string}) {
+    return await examServiceInstance.post('/exam/save', data);
 }
