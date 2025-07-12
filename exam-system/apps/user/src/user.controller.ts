@@ -68,12 +68,7 @@ export class UserController {
     };
   }
 
-  @Get('aaa')
-  @RequireLogin()
-  // aaa(@UserInfo() userInfo, @UserInfo('username') username) {
-  //   console.log(userInfo, username);
-  //   return 'aaa';
-  // }
+  
   @Post('update_password')
   async updatePassword(@Body() passwordDto: UpdateUserPasswordDto) {
     return this.userService.updatePassword(passwordDto);

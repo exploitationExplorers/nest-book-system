@@ -13,12 +13,13 @@ import { RequireLogin, UserInfo } from '@app/common';
 import { ExamAddDto } from './dto/exam-add.dto';
 import { ExamSaveDto } from './dto/exam-save.dto';
 
-@Controller()
+@Controller('exam')
 export class ExamController {
   constructor(private readonly examService: ExamService) {}
 
   @Get()
   getHello(): string {
+    console.log('getHello');
     return this.examService.getHello();
   }
 
