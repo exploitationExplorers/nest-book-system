@@ -6,24 +6,25 @@ import { PrismaModule } from '@app/prisma';
 import { EmailModule } from '@app/email';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from '@app/common';
+import { AuthGuard, CommonModule } from '@app/common';
 @Module({
   imports: [
     RedisModule,
     PrismaModule,
     EmailModule,
-    JwtModule.registerAsync({
-      global: true,
-      useFactory() {
-        return {
-          secret: 'secretKey', // Replace with your actual secret key
-          signOptions: {
-            // Options for the token
-            expiresIn: '30m', // 30分钟
-          },
-        };
-      },
-    }),
+    // JwtModule.registerAsync({
+    //   global: true,
+    //   useFactory() {
+    //     return {
+    //       secret: 'secretKey', // Replace with your actual secret key
+    //       signOptions: {
+    //         // Options for the token
+    //         expiresIn: '30m', // 30分钟
+    //       },
+    //     };
+    //   },
+    // }),
+    CommonModule,
   ],
   controllers: [UserController],
   providers: [
